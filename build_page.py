@@ -17,7 +17,7 @@ def syntax_highlight_vaib(raw_code):
 
     operators = ["->", "=>", "|>", "==", "!=", ">=", "<="]
     for op in operators:
-        raw_code = raw_code.replace(op, f"<span class='token-operator'>{op}</span>")
+        raw_code = raw_code.replace(op, f"<span class='token-operator'>{op}</span>", raw_code)
         
     commands = ["&grill", "&architect", "&mentor", "&canary", "&run", "&call", "&investigate", "&memorize", "&review", "&wait", "&ask", "&pr", "&trace"]
     for cmd in commands:
@@ -60,7 +60,7 @@ def compile_premium_site():
            "High-density architectural primitives that convert loose intents" in p_text:
             p.decompose()
 
-    # Remove leading horizontal rules before the first content section
+    # Remove leading horizontal rules before first content section
     for hr in list(soup.find_all('hr')):
         if hr.find_previous_sibling() is None or not any(hr.previous_siblings):
             hr.decompose()
@@ -76,7 +76,7 @@ def compile_premium_site():
     for hr in soup.find_all('hr'):
         hr['class'] = 'border-t border-zinc-800/60 my-10'
 
-    # Highlight and wrap code blocks
+    # Highlight and wrap code blocks with Copy buttons
     for pre in soup.find_all('pre'):
         code = pre.find('code')
         if code:
@@ -84,7 +84,7 @@ def compile_premium_site():
             code.clear()
             code.append(BeautifulSoup(highlighted_content, 'html.parser'))
             
-            frame = soup.new_tag('div', attrs={'class': 'my-6 border border-zinc-800/90 rounded-xl bg-[#070b14] overflow-hidden shadow-2xl w-full ring-1 ring-white/5'})
+            frame = soup.new_tag('div', attrs={'class': 'my-6 border border-zinc-800/90 rounded-xl bg-[#070b14] overflow-hidden shadow-2xl w-full ring-1 ring-white/5 relative group'})
             pre.wrap(frame)
             
             header = soup.new_tag('div', attrs={'class': 'bg-[#0b101d] px-4 py-2.5 border-b border-zinc-800/90 text-xs text-zinc-400 font-mono flex items-center justify-between select-none'})
@@ -101,8 +101,15 @@ def compile_premium_site():
             left_side.append(dot3)
             left_side.append(label)
             
-            right_side = soup.new_tag('span', attrs={'class': 'text-[10px] text-zinc-500 uppercase tracking-wider font-mono'})
-            right_side.string = "UTF-8"
+            right_side = soup.new_tag('div', attrs={'class': 'flex items-center space-x-3'})
+            
+            copy_btn = soup.new_tag('button', attrs={
+                'onclick': 'copyCodeBlock(this)',
+                'class': 'copy-btn text-[11px] text-zinc-400 hover:text-white bg-zinc-800/60 hover:bg-zinc-700/80 px-2.5 py-1 rounded transition-colors flex items-center space-x-1 font-mono cursor-pointer border border-zinc-700/50'
+            })
+            copy_btn.string = "Copy"
+            
+            right_side.append(copy_btn)
             
             header.append(left_side)
             header.append(right_side)
@@ -131,7 +138,7 @@ def compile_premium_site():
             '''
             p.replace_with(BeautifulSoup(banner_html, 'html.parser'))
 
-    # Centered & perfectly aligned Hero section
+    # Hero section with copy button
     hero_html = '''
     <section class="text-center pt-12 pb-10 space-y-6 max-w-2xl mx-auto font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
@@ -155,8 +162,11 @@ def compile_premium_site():
         <div class="pt-2 max-w-lg mx-auto">
             <div class="bg-[#070b14] border border-zinc-800/80 px-4 py-3 rounded-lg flex items-center space-x-3 text-zinc-300 shadow-md">
                 <span class="text-purple-400 font-bold select-none text-xs font-mono">$</span>
-                <input type="text" readonly value="git clone https://github.com/Chalarangelo/vaib.git" 
+                <input id="hero-cmd" type="text" readonly value="git clone https://github.com/Chalarangelo/vaib.git" 
                        class="bg-transparent border-none focus:outline-none font-mono text-xs w-full select-all text-zinc-300 text-left">
+                <button onclick="copyHeroCmd(this)" class="text-xs text-zinc-400 hover:text-white font-mono bg-zinc-800/80 hover:bg-zinc-700 px-2 py-1 rounded transition-colors flex-shrink-0 border border-zinc-700/50">
+                    Copy
+                </button>
             </div>
         </div>
     </section>

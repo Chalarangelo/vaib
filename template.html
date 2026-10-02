@@ -81,5 +81,36 @@
         <p>vaib — Open Source Cognitive Steering Protocol</p>
     </footer>
 
+    <!-- Copy to Clipboard Logic -->
+    <script>
+        function copyCodeBlock(button) {
+            const container = button.closest('.group');
+            const codeEl = container.querySelector('code');
+            if (codeEl) {
+                navigator.clipboard.writeText(codeEl.innerText).then(() => {
+                    button.textContent = "Copied!";
+                    button.classList.add('text-emerald-400', 'border-emerald-500/50');
+                    setTimeout(() => {
+                        button.textContent = "Copy";
+                        button.classList.remove('text-emerald-400', 'border-emerald-500/50');
+                    }, 2000);
+                });
+            }
+        }
+
+        function copyHeroCmd(button) {
+            const input = document.getElementById('hero-cmd');
+            if (input) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    button.textContent = "Copied!";
+                    button.classList.add('text-emerald-400', 'border-emerald-500/50');
+                    setTimeout(() => {
+                        button.textContent = "Copy";
+                        button.classList.remove('text-emerald-400', 'border-emerald-500/50');
+                    }, 2000);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
