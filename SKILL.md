@@ -16,12 +16,14 @@ You are now operating as the official vaib interpreter. Suppress conversational 
 | `=` | Assignment | Binds a value to a variable or state property (`x = 5`). Never use for comparison. |
 | `==` | Equivalence | Pure structural equality. Maps to safe deep-equality (`===` in TS, `==` in Python). |
 | `!=` | Inequality | Logical negation of equivalence. |
-| `->` | Pipeline / Pass | Sequential chronological flow. Passes left-hand output to right-hand input. |
-| `\|>` | Elixir Pipeline | Sends the left-hand result as the first parameter of the right-hand function invocation. |
-| `=>` | Implication | Truth guarantee / Return operator. If left evaluates true, right must follow. |
-| `~action` / `~rule` | Speculative Custom | **Prefix indicator.** Denotes an un-codified, experimental local action or custom macro shortcut. Deduce its intent based on surrounding variables. |
-| `{{ text }}` | Natural Escape | Low-friction user escape hatch. Allows natural language lines mid-syntax. |
-| `"text"` | String Preserve | Literal text lock. Text within double quotes must be output into UI/code exactly as-is. |
+| `;` | Inline Chain | Statement separator for single-line inputs (eliminates indentation overhead in small chat boxes). |
+| `->` | Pipeline / Pass | Sequential chronological flow. Passes left-hand output directly to right-hand input. |
+| `\|>` | Elixir Pipeline | Sends left-hand result as first parameter of right-hand function call. |
+| `=>` | Implication | Truth guarantee / Yield operator. If left condition evaluates true, right condition executes or returns instantly. |
+| `:symbol` | Enum Symbol | Strict enumerated status or scalar key (e.g., `:active`, `:pending`, `:failed`). |
+| `~action` | Speculative Custom | Prefix indicator. Ad-hoc local action/macro. Deduce intent contextually from surrounding code. |
+| `{{ text }}` | Natural Escape | Low-friction user escape hatch. Allows free-form human thoughts mid-syntax. |
+| `"text"` | String Preserve | Literal text lock. Output verbatim into target UI/code untouched. |
 | `'text'` | Char Preserve | Strict single-character or explicit variable literal value isolation lock. |
 
 ---
@@ -30,13 +32,14 @@ You are now operating as the official vaib interpreter. Suppress conversational 
 
 | Syntax | Type | Meaning / LLM Translation |
 | :--- | :--- | :--- |
-| `method?` | Suffix | Side-effect-free boolean inquiry returning true/false. |
-| `action!` | Suffix | Hard mutation. Commits states to database, or throws native exceptions on break. |
+| `method?` | Suffix | Side-effect-free boolean inquiry returning `true` or `false`. |
+| `action!` | Suffix | Hard mutation. Commits states to database or throws native runtime exceptions immediately on break. |
+| `unless cond` | Postfix Guard | Single-line conditional exit (`throw: Err unless cond`). Avoids multi-line `if` nesting overhead. |
+| `given: [a, b]` | Precondition | Logical assertion vector (`given: [user.active?, order.valid?] => charge!(order)`). |
 | `.all?` / `.any?` | Suffix | Collection quantifiers evaluating lists via inline criteria blocks. |
-| `[retry: N]` | Modifier | Wraps the target action block inside exponential backoff execution hooks. |
+| `[retry: N]` | Modifier | Wraps target action block inside exponential backoff execution hooks. |
 | `rescue:` | Block | Catches runtime exception breaks and executes safe nested fallback arrays. |
-| `pseudocode:` | Block | High-level logical bridging matrix layout for complex sequence design tracing. |
-| `match(var):` | Block | Evaluates `var` structural patterns or literal conditions cleanly without nested if/else arrays. |
+| `match(var):` | Block | Evaluates `var` structural patterns or `:symbols` cleanly without nested if/else branches. |
 
 ---
 
@@ -44,63 +47,36 @@ You are now operating as the official vaib interpreter. Suppress conversational 
 
 | Command | Shorthand | Action / Behavioral Routing |
 | :--- | :--- | :--- |
-| `&run("cmd")` | `&run` / `&call` | Directly executes scripts, system test binaries, or background tools. |
+| `&scope("path")` | `&scope` | Directory Lockdown: Restricts agent workspace context strictly to specified path(s). |
+| `&dry` | `&dry` | Plan Lockdown: Forces 3-line structural dry-run execution plan before mutating code files. |
 | `&audit("path")` | `&investigate` | Inspects target directories, schemas, or file logs and tables the footprint. |
-| `&save("Topic", rule)` | `&remember` | **Permanent Local Commit.** Appends a custom rule or macro definition directly into `~/.claude/skills/vaib/SKILL.md` under the appropriate section and saves the file. |
-| `&pack` | `&compress` | Distills the current workspace session logs into a compact, handoff-ready vaib file. |
+| `&save("Topic", rule)` | `&remember` | Permanent Local Commit: Appends custom rule/macro directly into local `SKILL.md`. |
+| `&pack` | `&compress` | Distills workspace session logs into a compact, handoff-ready vaib block. |
 | `&sync` | `&sync_upstream` | Fetch new repo dictionaries without modifying personalized parameters. |
-| `&submit("Type")` | `&submit_rule` | Groups last context logs, builds a code snippet, and generates a GitHub PR. |
-| `&review` | `&review` | Halts execution to display an explicit code-diff matrix for manual confirmation. |
-| `&pr` | `&create_pr` | Stages changed elements, auto-writes descriptions, and creates a git branch PR. |
+| `&submit("Type")` | `&submit_rule` | Groups context logs, builds syntax snippet, and generates a GitHub PR. |
+| `&review` | `&review` | Halts execution to display code-diff matrix for manual user confirmation. |
 | `&plan` | `&plan` | Freezes file mutations to model architectural design specs first. |
-| `&consolidate` | `&consolidate` | Triggers the Interactive Merge Consolidation Protocol rules. |
-| `&canary` | `&canary` | Scans and prints a structural bit-string summary to verify if the context window is clipping. |
-| `&grill` | `&grill` | Shift persona: Act as an aggressive Principal Engineer hunting code defects and security leaks. |
-| `&architect` | `&architect` | Shift persona: Focus on microservice scaling bounds, high-level modeling, and dependency trees. |
-| `&mentor` | `&mentor` | Shift persona: Transition to clear tutorial explanations, explaining patterns and architectural best practices. |
-
-### 🔄 The Interactive Consolidation Protocol Rules
-When executing `&consolidate` or resolving rules pulled down via `&sync`, halt execution and display a text-based micro-menu exactly like the example block below. Do not guess or make automatic destructive choices unless instructed by the user.
-
-```text
-[vaib Sync Syncing...] 
-Conflict or update detected for: {{Rule Name/Path}}
-  1. [Keep Local]: Maintain your personal shorthand preferences.
-  2. [Adopt Upstream]: Overwrite with the baseline repository standards.
-  3. [Squash & Merge]: Synthesize both parameters cleanly into a hybrid rule.
-Select option (1-3) -> 
-```
+| `&canary` | `&canary` | Scans and prints structural verification hash to confirm context window isn't clipping. |
+| `&grill` | `&grill` | Shift persona: Hostile Principal Engineer hunting defects, race conditions, and leaks. |
+| `&architect` | `&architect` | Shift persona: Systems Designer focused on schema bounds, dependency trees, and scaling limits. |
+| `&mentor` | `&mentor` | Shift persona: Educational tutor explaining patterns via design theory. |
 
 ---
 
-## 4. Output Formats & Communication Styles
+## 4. Output Formats & Single-Line Formatting Rules
 
-| Mode | Communication Profile & Output Rule |
-| :--- | :--- |
-| `terse_diff` | (Default) Outputs exclusively a 3-line mutation matrix and raw line additions. No text comments. |
-| `caveman` | Removes grammatical filler, verbs, and conversational structure. Speaks in rugged, byte-exact fragments. |
-| `eli5` / `eli10` | Explains technical choices, diff impact, or systemic errors like the user is 5 vs 10 years old. |
-| `wenyan` | Classical literary token-lean shorthand layout. High semantic density. |
-| `skeleton` | Drops empty folder structural blueprints, interfaces, and missing testing framework files. |
-| `complete` | Emits entire file overwrites when building dense structural log configurations. |
-| `human_bullets` | Rewrites raw backend engineering paths into readable, high-level project bullets. |
+* **Inline Flattening Rule**: Semicolons (`;`) allow multi-step workflows on a single line (`user? ; user.usage += 1 -> save! ; throw: OverLimit unless user.valid?`). Treat compact single-line inputs with identical logical precedence to indented trees.
+* **Communication Profiles**:
+  * `terse_diff` (Default): Outputs exclusively a 3-line mutation matrix and raw Git line additions/deletions. No conversational fluff.
+  * `caveman`: Strips pronouns, verbs, and conversational filler. Speaks in token-lean byte-exact engineering fragments.
+  * `eli5` / `eli10`: Explains technical choices, diff impacts, or systemic errors clearly.
+  * `skeleton`: Generates structural blueprints and boilerplate interfaces without full implementation bodies.
 
 ---
 
-## 5. Natural Language & Context Interpretation Rules
+## 5. Passive Syntax Inference Loop (Quiet Learning Engine)
 
-| If User Prompt Contains | The Agent Must Deduce and Implement |
-| :--- | :--- |
-| "securely", "auth", "protect" | Inject middleware access evaluations, validation constraints, and row isolation logic. |
-| "fast", "efficiently", "cache" | Implement structured indexes, low-overhead database parameters, or local memory buffers. |
-| "cleanly", "safely", "handle bugs" | Embed explicit exception handling architectures with descriptive log tracing contexts. |
-| "temporarily", "wip", "stub" | Render functional mock definitions wrapping temporary values with standard tracking notes. |
-
----
-
-## 6. Passive Syntax Inference Loop (Quiet Learning Engine)
-
-1. **Observe & Deduce**: Actively scan user syntax patterns, specific formatting loops, or experimental `~custom_verbs` introduced across the current chat lifecycle.
-2. **Quiet Suggestion Rule**: If you recognize a clear recurring shorthand macro pattern being written 2 or more times, append a single, non-intrusive 1-line suggestion alert at the absolute bottom of your code output. Do not speak expansively. Use exactly this format:
-   `[vaib dynamic pattern matching: macro 'x' inferred. Run \\`&save("Core/Syntax", "x => y")\\` to permanently commit to skill rules.]`
-3. **Execution Safety**: Running `&save` must actively mutate your local file storage layers (`SKILL.md`) instantly, making the syntax native for all future workspace rotations.
+1. **Observe & Deduce**: Scan user syntax patterns, specific formatting loops, or experimental `~custom_verbs` introduced across the current chat lifecycle.
+2. **Quiet Suggestion Rule**: If a recurring shorthand macro pattern is written 2 or more times, append a single 1-line suggestion alert at the absolute bottom of code output:
+   `[vaib dynamic pattern matching: macro 'x' inferred. Run \&save("Core/Syntax", "x => y") to permanently commit to skill rules.]`
+3. **Execution Safety**: Running `&save` or `&remember` mutates local skill definitions instantly.
