@@ -30,7 +30,10 @@ jobs:
           git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Check if install.sh has actual differences
+          # Force Git to track install.sh even if it's the first execution
+          git add -N install.sh
+          
+          # Check if install.sh has actual differences or is brand new
           if ! git diff --quiet install.sh; then
             echo "📈 Changes detected in compiled output. Committing changes securely..."
             git add install.sh
