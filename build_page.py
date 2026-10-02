@@ -6,17 +6,14 @@ import markdown
 
 def syntax_highlight_vaib(raw_code):
     """Safely tokenizes the custom vaib syntax grammar primitives without breaking HTML tags."""
-    # Frontmatter parameters
     raw_code = raw_code.replace("vaib:", "<span class='token-keyword'>vaib:</span>")
     raw_code = raw_code.replace("stack:", "<span class='token-keyword'>stack:</span>")
     raw_code = raw_code.replace("output_format:", "<span class='token-keyword'>output_format:</span>")
     
-    # Core pipeline headers
     raw_code = raw_code.replace("- fn ", "<span class='token-macro'>- fn </span>")
     raw_code = raw_code.replace("# State:", "<span class='token-macro'># State:</span>")
     raw_code = raw_code.replace("# Logic", "<span class='token-macro'># Logic</span>")
     
-    # Special operators and control hooks
     operators = ["->", "=>", "|>"]
     for op in operators:
         raw_code = raw_code.replace(op, f"<span class='token-symbol'>{op}</span>")
@@ -25,7 +22,6 @@ def syntax_highlight_vaib(raw_code):
     for cmd in commands:
         raw_code = raw_code.replace(cmd, f"<span class='token-macro'>{cmd}</span>")
         
-    # Standard configuration comments (only matching start of lines to avoid tag breaking)
     raw_code = re.sub(r'(?m)^#\s*(.*)$', r"<span class='token-comment'># \1</span>", raw_code)
     return raw_code
 
@@ -123,7 +119,9 @@ def compile_premium_site():
     '''
 
     compiled_body = hero_html + f'<div class="markdown-body max-w-3xl mx-auto">{str(soup)}</div>'
-    final_output = template.replace("<!-- {{VAIB_DYNAMIC_MARKDOWN_BODY}} -->", compiled_body)
+    
+    # Standard string replacement target matching template.html
+    final_output = template.replace("__VAIB_CONTENT__", compiled_body)
 
     with open(output_path, "w", encoding="utf-8") as out:
         out.write(final_output)
