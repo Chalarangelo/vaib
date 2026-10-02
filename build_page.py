@@ -111,7 +111,7 @@ def compile_premium_site():
             pre['class'] = 'p-5 overflow-x-auto text-zinc-200 font-mono text-[13px] leading-relaxed bg-transparent border-0 m-0 w-full block'
             code['class'] = 'p-0 bg-transparent border-0 font-mono block'
 
-    # Upgrade the trailing punchline into a high-energy CTA banner
+    # Upgrade trailing punchline into a high-energy CTA banner
     for p in soup.find_all('p'):
         if 'Stop coding. Start vibing.' in p.text:
             banner_html = '''
@@ -131,18 +131,18 @@ def compile_premium_site():
             '''
             p.replace_with(BeautifulSoup(banner_html, 'html.parser'))
 
-    # Single-source Hero section
+    # Centered & perfectly aligned Hero section
     hero_html = '''
-    <section class="text-left pt-10 pb-8 space-y-5 max-w-3xl font-sans">
+    <section class="text-center pt-12 pb-10 space-y-6 max-w-2xl mx-auto font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Semantic constraints <br>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">for agentic engineering.</span>
         </h1>
-        <p class="text-zinc-400 text-sm sm:text-base font-normal leading-relaxed max-w-2xl">
+        <p class="text-zinc-400 text-sm sm:text-base font-normal leading-relaxed">
             High-density architectural primitives that convert loose intents into verified code structures.
         </p>
         
-        <div class="pt-1 flex flex-wrap items-center gap-3">
+        <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
             <a href="https://github.com/Chalarangelo/vaib" target="_blank" class="bg-zinc-100 text-zinc-900 px-4 py-2 rounded-lg font-bold text-xs hover:bg-white transition-all shadow-md flex items-center space-x-2">
                 <span>View Repository</span>
                 <span class="text-zinc-500">↗</span>
@@ -152,17 +152,17 @@ def compile_premium_site():
             </a>
         </div>
         
-        <div class="pt-1 max-w-xl">
-            <div class="bg-[#070b14] border border-zinc-800/80 px-3.5 py-2.5 rounded-lg flex items-center space-x-3 text-zinc-300 shadow-md">
+        <div class="pt-2 max-w-lg mx-auto">
+            <div class="bg-[#070b14] border border-zinc-800/80 px-4 py-3 rounded-lg flex items-center space-x-3 text-zinc-300 shadow-md">
                 <span class="text-purple-400 font-bold select-none text-xs font-mono">$</span>
                 <input type="text" readonly value="git clone https://github.com/Chalarangelo/vaib.git" 
-                       class="bg-transparent border-none focus:outline-none font-mono text-xs w-full select-all text-zinc-300">
+                       class="bg-transparent border-none focus:outline-none font-mono text-xs w-full select-all text-zinc-300 text-left">
             </div>
         </div>
     </section>
     '''
 
-    compiled_body = hero_html + f'<div class="markdown-body max-w-3xl mx-auto">{str(soup)}</div>'
+    compiled_body = hero_html + f'<div class="markdown-body max-w-2xl mx-auto">{str(soup)}</div>'
     final_output = template.replace("__VAIB_CONTENT__", compiled_body)
 
     with open(output_path, "w", encoding="utf-8") as out:
