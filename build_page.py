@@ -6,32 +6,23 @@ import markdown
 
 def syntax_highlight_vaib(raw_code):
     """Vibrant, multi-token syntax grammar for the vaib code editor component."""
-    # Frontmatter keys (Rose Pink)
     raw_code = re.sub(r'\b(vaib|stack|output_format):', r"<span class='token-key'>\1:</span>", raw_code)
-    
-    # Strings in double or single quotes (Vibrant Emerald)
     raw_code = re.sub(r'("[^"]*"|\'[^\']*\')', r"<span class='token-string'>\1</span>", raw_code)
-
-    # Core structural markers & functions (Amber/Gold)
     raw_code = re.sub(r'(- fn\s+)([A-Za-z0-9_]+)', r"<span class='token-fn-prefix'>\1</span><span class='token-fn-name'>\2</span>", raw_code)
     raw_code = raw_code.replace("# State:", "<span class='token-section'># State:</span>")
     raw_code = raw_code.replace("# Logic", "<span class='token-section'># Logic</span>")
     
-    # Primitive types & keywords (Bright Blue)
     raw_code = re.sub(r'\b(enum|decimal!|char|string|boolean|int)\b', r"<span class='token-type'>\1</span>", raw_code)
     raw_code = re.sub(r'\b(match|throw|rescue|mutate)\b', r"<span class='token-keyword'>\1</span>", raw_code)
 
-    # Operators & Arrows (Electric Cyan)
     operators = ["->", "=>", "|>", "==", "!=", ">=", "<="]
     for op in operators:
         raw_code = raw_code.replace(op, f"<span class='token-operator'>{op}</span>")
         
-    # Execution hooks & macros (Purple Accent)
     commands = ["&grill", "&architect", "&mentor", "&canary", "&run", "&call", "&investigate", "&memorize", "&review", "&wait", "&ask", "&pr", "&trace"]
     for cmd in commands:
         raw_code = raw_code.replace(cmd, f"<span class='token-command'>{cmd}</span>")
         
-    # Comments (Muted Slate)
     raw_code = re.sub(r'(?m)^#\s*(.*)$', r"<span class='token-comment'># \1</span>", raw_code)
     return raw_code
 
@@ -63,7 +54,6 @@ def compile_premium_site():
     for h3 in soup.find_all('h3'):
         h3['class'] = 'text-base sm:text-lg font-semibold text-zinc-200 mt-8 mb-3 font-sans'
 
-    # Rich Code Window Shell
     for pre in soup.find_all('pre'):
         code = pre.find('code')
         if code:
@@ -98,6 +88,7 @@ def compile_premium_site():
             pre['class'] = 'p-5 overflow-x-auto text-zinc-200 font-mono text-[13px] leading-relaxed bg-transparent border-0 m-0 w-full block'
             code['class'] = 'p-0 bg-transparent border-0 font-mono block'
 
+    # Streamlined Hero: Pure value proposition, no clutter
     hero_html = '''
     <section class="text-left pt-10 pb-8 space-y-5 max-w-3xl font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">

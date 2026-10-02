@@ -1,12 +1,29 @@
-# 🌊 vaib (Vibe-Accelerated Intent Blocks)
+# 🌊 vaib
 
-> "Writing lines of code is a 2024 problem. Engineering the absolute *meaning* of a system is a 2026 reality." 
+**Semantic constraints for agentic engineering.**
 
-**vaib** is an open-source, zero-compilation linguistic wrapper and cognitive-steering protocol built exclusively for **Vibe Engineers in the making**. 
+*High-density architectural primitives that convert loose intents into verified code structures.*
 
-If you are a developer who is tired of babysitting syntax errors and want to operate as a high-leverage **Director of Intent**, `vaib` gives you the ultimate power framework. It converts hyper-dense architectural blueprints and loose conceptual flows into bulletproof production-grade code repositories. 
+---
 
-It installs straight into your local agentic terminal (`claude-code`, VS Code Agents, Cursor), preserves your elite psychological flow state, and saves a metric ton of money on your token bill.
+## ⚡ Why vaib?
+Traditional LLM prompts waste tokens on conversational filler, imprecise descriptions, and redundant file rewrites. **vaib** is an open-source, zero-compilation linguistic wrapper and cognitive-steering protocol built for agentic terminals (`claude-code`, Cursor, VS Code Agents).
+
+* **Prefix-Cache Optimized**: Declarative YAML-like frontmatter triggers 100% LLM cache hits.
+* **Diff-Only Output**: `terse_diff` forces 65%–75% token savings by emitting line mutations instead of full-file rewrites.
+* **Zero Halting Fluff**: `caveman` mode compresses output streams by up to 85% for lightning-fast execution.
+* **Deterministic Steering**: Suffixes like `!` and `?` enforce strict side-effect isolation and runtime exception paths.
+
+---
+
+## 🚀 60-Second Quickstart
+Inject the core linguistic engine directly into your global agent profile:
+
+```bash
+curl -sSL [https://raw.githubusercontent.com/Chalarangelo/vaib/main/install.sh](https://raw.githubusercontent.com/Chalarangelo/vaib/main/install.sh) | bash
+```
+
+Fire up your agentic CLI terminal, type `/skills` (or verify `~/.claude/skills/vaib`), and `vaib` becomes an active protocol layer.
 
 ---
 
@@ -19,31 +36,19 @@ Because `vaib` structures your inputs into high-density declarative data maps an
 
 ---
 
-## 🚀 Installation (The 60-Second Onboarding)
-
-Inject the core linguistic engine directly into your global agent profile with a single curl command:
-
-```bash
-curl -sSL https://githubusercontent.com | bash
-```
-
-Fire up your local agentic CLI terminal, type `/skills`, and watch `vaib` light up as a globally active, cached protocol layer.
-
----
-
-## 💎 The Vibe-Steering Primitives
-
-Stop typing out paragraphs of explanations. Use the semantic toolkit to command your agent's brain:
+## 💎 Semantic Toolkit
+Stop writing paragraphs. Steer your agent with precise structural operators:
 
 ### 🚦 Flow & Logic Control
-*   `method?` — **Inspection Suffix.** Enforces side-effect-free boolean logic checks.
-*   `action!` — **Enforcement Suffix.** Triggers explosive database mutations or hard runtime exception throws.
-*   `{{ loose thoughts }}` — **The Natural Escape Hatch.** Drop raw, unstructured human vibes mid-syntax when you hit a complex architectural thought. The engine translates it contextually.
+* `method?` — **Inspection Suffix.** Enforces side-effect-free boolean checks.
+* `action!` — **Enforcement Suffix.** Triggers hard database commits or runtime exception throws.
+* `{{ loose thoughts }}` — **Natural Escape.** Drop raw, unstructured thoughts mid-syntax; the engine translates them contextually.
+* `"literal"` / `'char'` — **Text Lock.** Guarantees exact UI string or character preservation.
 
 ### 🎭 Cognitive Identity Overrides
-*   `&grill` — Shifts the agent into a hostile, aggressive Principal Engineer hunting down your code defects and security exploits.
-*   `&architect` — Systems optimization mode. Forces the AI to map microservice scaling boundaries and structural schema trees first.
-*   `&mentor` — Deep educational mode. Explains theoretical best-practices via clean metaphors.
+* `&grill` — Shifts agent into a hostile Principal Engineer hunting defects and security leaks.
+* `&architect` — Systems optimization mode. Forces schema trees and service boundaries first.
+* `&mentor` — Deep educational mode with pattern breakdowns and metaphors.
 
 ---
 
@@ -135,14 +140,16 @@ output_format: eli5
 
 ---
 
-## 🤝 Upstream Synced Contributions
+## 🤝 Upstream Rule Synchronization
 
-When you cook up an incredibly fast local shorthand trick, don't leave your terminal to share it. Let the agent ship it back to the community for you:
+Persist custom shortcuts locally or share them upstream without leaving your agent terminal:
 
 ```yaml
-# Just type this right into your active prompt box:
 &memorize("Data/UltraCaching") -> &submit("Core/Syntax")
 ```
-The engine automatically distills your last transaction logs, generates a clean Markdown snippet, stages the code branch, and opens a public upstream Pull Request on GitHub. 
 
-Welcome to the era of pure Intent Architecture. Stop coding. Start vibing. 🌊
+The engine distills execution history, builds a clean syntax snippet, stages a branch, and opens an upstream GitHub PR.
+
+---
+
+**Stop coding. Start vibing.** 🌊
