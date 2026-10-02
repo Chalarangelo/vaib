@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#09090b] text-zinc-50 antialiased selection:bg-cyan-500 selection:text-zinc-950">
+<html lang="en" class="bg-[#030303] text-zinc-50 antialiased selection:bg-cyan-500 selection:text-zinc-950">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vaib — The Linguistic Wrapper for Coding Agents</title>
+    <title>vaib — Vibe-Accelerated Intent Blocks</title>
     <script src="https://tailwindcss.com"></script>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -12,64 +12,58 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030303; }
         code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* t3.codes Style Grid Overlay Backdrop Pattern */
+        /* Grid Overlay Backdrop Architecture matching t3.codes */
         .grid-bg {
             background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(39, 39, 42, 0.2) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(39, 39, 42, 0.2) 1px, transparent 1px);
+            background-image: linear-gradient(to right, rgba(39, 39, 42, 0.15) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(39, 39, 42, 0.15) 1px, transparent 1px);
         }
         .grid-fade {
-            mask-image: radial-gradient(ellipse at top, black 40%, transparent 80%);
-            -webkit-mask-image: radial-gradient(ellipse at top, black 40%, transparent 80%);
+            mask-image: radial-gradient(ellipse at top, black 50%, transparent 90%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 50%, transparent 90%);
         }
-
-        /* Fluid Entry Animations */
+        
         @keyframes subtleGlow {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.05); }
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
         }
-        .glow-pulse { animation: subtleGlow 8s infinite ease-in-out; }
+        .glow-pulse { animation: subtleGlow 10s infinite ease-in-out; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden relative bg-[#030303]">
 
-    <!-- Ambient Grid & Glow Backdrop -->
-    <div class="absolute inset-0 grid-bg grid-fade pointer-events-none z-0 min-h-[900px]"></div>
-    <div class="absolute top-[-10%] left-[20%] w-[600px] h-[400px] rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 blur-[120px] glow-pulse pointer-events-none z-0"></div>
+    <!-- Ambient Grid Background Patterns -->
+    <div class="absolute inset-0 grid-bg grid-fade pointer-events-none z-0 min-h-[1000px]"></div>
+    <div class="absolute top-[-5%] left-[25%] w-[500px] h-[350px] rounded-full bg-cyan-500/10 blur-[100px] glow-pulse pointer-events-none z-0"></div>
 
-    <!-- Sticky Navigation Top Bar -->
-    <header class="border-b border-zinc-900 bg-[#030303]/60 backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Top Navigation Header -->
+    <header class="border-b border-zinc-900 bg-[#030303]/70 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="text-xl font-extrabold tracking-tight text-white select-none">🌊 vaib</span>
-                <span class="px-2 py-0.5 text-[10px] font-bold bg-zinc-900 text-zinc-400 rounded-full border border-zinc-800 tracking-wider uppercase">Open Source</span>
+                <span class="px-2 py-0.5 text-[10px] font-bold bg-zinc-900 text-zinc-500 rounded-full border border-zinc-800 uppercase tracking-wider">v1.0</span>
             </div>
-            <div class="flex items-center space-x-6">
-                <a href="https://github.com" target="_blank" class="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors flex items-center space-x-1.5">
-                    <span>GitHub Repo</span>
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                </a>
-            </div>
+            <a href="https://github.com" target="_blank" class="text-sm font-semibold text-zinc-400 hover:text-zinc-100 transition-colors flex items-center">
+                <span>GitHub Source</span>
+                <svg class="w-4 h-4 ml-1.5 inline-block align-middle text-zinc-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://w3.org" style="width: 1rem; height: 1rem; min-width: 1rem;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+            </a>
         </div>
     </header>
 
-    <!-- Main Component Tree Wrapper -->
-    <main class="max-w-4xl mx-auto px-6 py-20 w-full flex-grow relative z-10 space-y-24">
-        
-        <!-- Target for Programmatic Content Injection -->
+    <!-- Pre-Compiled Elements Node Injection Target -->
+    <main class="max-w-4xl mx-auto px-6 py-12 w-full flex-grow relative z-10">
         <div id="vaib-compiled-root">
             <!-- {{VAIB_DYNAMIC_MARKDOWN_BODY}} -->
         </div>
-
     </main>
 
-    <!-- Minimalistic Developer Footer [t3.codes inspired] -->
-    <footer class="border-t border-zinc-900 py-10 bg-[#030303] relative z-10">
-        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
-            <div class="flex items-center space-x-2">
-                <span>&copy; 2026 vaib Architecture. MIT Licensed.</span>
-            </div>
-            <div class="tracking-wide uppercase font-semibold text-zinc-600 font-mono">Stop writing boilerplate. Start Vibing.</div>
+    <!-- Minimalistic Developer Footer -->
+    <footer class="border-t border-zinc-900 py-8 bg-[#030303] relative z-10">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4">
+            <div>&copy; 2026 vaib Architecture framework. Open-source under MIT bounds.</div>
+            <div class="font-mono tracking-wider text-zinc-700 uppercase">Pre-compiled Static Build</div>
         </div>
     </footer>
 

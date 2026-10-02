@@ -36,8 +36,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Markdown Compilers
-        run: pip install markdown
+      - name: Install Compilers & Parsers
+        run: pip install markdown beautifulsoup4
 
       - name: Pre-compile README into Premium Theme Shell
         run: python3 build_page.py
