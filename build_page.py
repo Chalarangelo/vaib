@@ -40,6 +40,7 @@ def compile_premium_site():
     with open(template_path, "r", encoding="utf-8") as t:
         template = t.read()
 
+    # Strip YAML frontmatter if present
     if md_text.startswith("---"):
         parts = md_text.split("---", 2)
         if len(parts) >= 3:
@@ -48,12 +49,22 @@ def compile_premium_site():
     html_raw = markdown.markdown(md_text, extensions=['tables', 'fenced_code'])
     soup = BeautifulSoup(html_raw, 'html.parser')
 
+    # Remove duplicated h1/title/subtitle lines rendered from README top
+    for h1 in soup.find_all('h1'):
+        h1.decompose()
+
+    # Uniform dark subtle borders for h2
     for h2 in soup.find_all('h2'):
-        h2['class'] = 'text-xl sm:text-2xl font-bold tracking-tight text-zinc-100 border-b border-zinc-800 pb-2.5 mt-12 mb-5 font-sans'
+        h2['class'] = 'text-xl sm:text-2xl font-bold tracking-tight text-zinc-100 border-b border-zinc-800/60 pb-2.5 mt-12 mb-5 font-sans'
 
     for h3 in soup.find_all('h3'):
         h3['class'] = 'text-base sm:text-lg font-semibold text-zinc-200 mt-8 mb-3 font-sans'
 
+    # Uniform dark subtle horizontal rules (<hr>)
+    for hr in soup.find_all('hr'):
+        hr['class'] = 'border-t border-zinc-800/60 my-10'
+
+    # Highlight and wrap code blocks
     for pre in soup.find_all('pre'):
         code = pre.find('code')
         if code:
@@ -88,7 +99,27 @@ def compile_premium_site():
             pre['class'] = 'p-5 overflow-x-auto text-zinc-200 font-mono text-[13px] leading-relaxed bg-transparent border-0 m-0 w-full block'
             code['class'] = 'p-0 bg-transparent border-0 font-mono block'
 
-    # Streamlined Hero: Pure value proposition, no clutter
+    # Upgrade the trailing punchline into a high-energy CTA banner
+    for p in soup.find_all('p'):
+        if 'Stop coding. Start vibing.' in p.text:
+            banner_html = '''
+            <div class="my-14 p-8 rounded-2xl bg-gradient-to-r from-purple-900/30 via-indigo-900/20 to-cyan-900/30 border border-purple-500/30 text-center relative overflow-hidden shadow-2xl backdrop-blur-sm">
+                <div class="absolute -top-12 -right-12 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+                    Stop coding. <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Start vibing.</span> 🌊
+                </h3>
+                <p class="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto mb-6">
+                    Elevate your AI agent workflows with zero-compilation semantic constraints today.
+                </p>
+                <a href="https://github.com/Chalarangelo/vaib" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold text-xs px-6 py-3 rounded-lg hover:opacity-90 transition-all shadow-lg hover:shadow-purple-500/25">
+                    <span>Get Started on GitHub</span>
+                    <span>→</span>
+                </a>
+            </div>
+            '''
+            p.replace_with(BeautifulSoup(banner_html, 'html.parser'))
+
+    # Hero section definition
     hero_html = '''
     <section class="text-left pt-10 pb-8 space-y-5 max-w-3xl font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
