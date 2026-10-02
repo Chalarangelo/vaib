@@ -1,102 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: #030303; color: #f4f4f5;">
+<html lang="en" style="background-color: #030303; color: #ededed;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vaib — The Shorthand Protocol for Agentic Coding</title>
+    <title>vaib — The Open Source Control Plane for Coding Agents</title>
     
-    <!-- Pre-Compiled Production CSS Engine -->
+    <!-- Stable Production Tailwind CSS Elements -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
-    <!-- Premium Google Font Architecture -->
+    <!-- Premium Geist + Mono Typography Layers (t3.codes match) -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030303; color: #a1a1aa; overflow-x: hidden; }
+        body { font-family: 'Geist', sans-serif; background-color: #030303; color: #8e8e93; overflow-x: hidden; }
         code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* t3.codes Style Grid Overlay Backdrop Pattern */
+        /* Premium t3 Grid Backdrops Pattern Matrix */
         .grid-bg {
-            background-size: 50px 50px;
-            background-image: linear-gradient(to right, rgba(63, 63, 70, 0.08) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(63, 63, 70, 0.08) 1px, transparent 1px);
-            mask-image: radial-gradient(ellipse at top, black 50%, transparent 90%);
-            -webkit-mask-image: radial-gradient(ellipse at top, black 50%, transparent 90%);
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            mask-image: radial-gradient(ellipse at top, black 60%, transparent 95%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 60%, transparent 95%);
         }
 
-        /* Smooth Interactive Entrance Animations */
+        /* Pure CSS t3 Entry Animations */
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes glowMovement {
-            0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.3; }
-            50% { transform: translate(30px, -20px) scale(1.1); opacity: 0.5; }
-        }
+        .animate-slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
-        .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .animate-glow { animation: glowMovement 12s infinite ease-in-out; }
+        /* Typographic Style Injection rules targeting pre-rendered markdown nodes */
+        .markdown-body h2 { font-size: 2.25rem; font-weight: 800; color: #ffffff; letter-spacing: -0.04em; line-height: 1.15; margin-top: 6rem; margin-bottom: 1.5rem; text-align: center; }
+        .markdown-body h3 { font-size: 1.5rem; font-weight: 700; color: #ffffff; letter-spacing: -0.03em; margin-top: 3.5rem; margin-bottom: 1rem; }
+        .markdown-body p { color: #8e8e93; font-size: 1.05rem; line-height: 1.65; margin-bottom: 1.5rem; }
+        .markdown-body ul { list-style-type: none; padding-left: 0; margin-bottom: 2rem; }
+        .markdown-body li { position: relative; padding-left: 1.75rem; margin-bottom: 0.75rem; color: #ededed; font-size: 1rem; }
+        .markdown-body li::before { content: "✓"; position: absolute; left: 0; color: #30d158; font-weight: bold; }
+        .markdown-body blockquote { border-left: 3px solid #007aff; background-color: rgba(28, 28, 30, 0.4); padding: 1.25rem 1.5rem; border-radius: 0 0.75rem 0.75rem 0; font-style: italic; color: #ededed; margin: 2.5rem 0; }
         
-        /* Clean Markdown Styling Boundaries */
-        .markdown-body h2 { font-size: 1.75rem; font-weight: 800; color: #ffffff; margin-top: 4rem; margin-bottom: 1.5rem; letter-spacing: -0.025em; border-bottom: 1px solid #1f1f23; padding-bottom: 0.5rem; }
-        .markdown-body h3 { font-size: 1.125rem; font-weight: 700; color: #22d3ee; margin-top: 2.5rem; margin-bottom: 0.75rem; font-mono: tracking-wider; text-transform: uppercase; }
-        .markdown-body p { color: #a1a1aa; font-size: 1rem; line-height: 1.75; margin-bottom: 1.25rem; }
-        .markdown-body ul { list-style-type: disc; list-style-position: inside; color: #a1a1aa; padding-left: 0.5rem; margin-bottom: 1.5rem; }
-        .markdown-body li { margin-bottom: 0.5rem; color: #a1a1aa; }
-        .markdown-body blockquote { border-left: 3px solid #06b6d4; background-color: rgba(24, 24, 27, 0.4); padding: 1rem 1.25rem; border-radius: 0 0.75rem 0.75rem 0; font-style: italic; color: #e4e4e7; margin: 2rem 0; }
-        
-        /* Structural Data Tables matching the specification constraints */
-        .markdown-body table { width: 100%; text-align: left; border-collapse: collapse; margin: 2rem 0; font-size: 0.875rem; background-color: rgba(24, 24, 27, 0.2); border: 1px solid #1f1f23; border-radius: 0.75rem; overflow: hidden; }
-        .markdown-body th { background-color: rgba(27, 27, 30, 0.8); padding: 0.875rem 1rem; color: #e4e4e7; font-weight: 700; border-bottom: 1px solid #1f1f23; }
-        .markdown-body td { padding: 0.875rem 1rem; color: #a1a1aa; border-bottom: 1px solid rgba(27, 27, 30, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+        /* Sleek Data Matrix Layout Tables */
+        .markdown-body table { width: 100%; text-align: left; border-collapse: collapse; margin: 2.5rem 0; font-size: 0.875rem; border: 1px solid #1c1c1e; border-radius: 0.75rem; overflow: hidden; background-color: rgba(28, 28, 30, 0.2); }
+        .markdown-body th { background-color: #1c1c1e; padding: 1rem; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1c1c1e; }
+        .markdown-body td { padding: 1rem; color: #8e8e93; border-bottom: 1px solid rgba(28, 28, 30, 0.6); }
         .markdown-body tr:last-child td { border-bottom: 0; }
         
-        /* Shorthand codeblocks framework styles */
-        .markdown-body pre { background-color: #09090b; padding: 1.25rem; border-radius: 0.75rem; border: 1px solid #1f1f23; overflow-x: auto; margin: 1.5rem 0; color: #e4e4e7; font-size: 0.85rem; line-height: 1.6; }
-        .markdown-body code { padding: 0.125rem 0.375rem; background-color: #18181b; border: 1px solid #27272a; color: #22d3ee; border-radius: 0.375rem; font-weight: 500; font-size: 0.85rem; }
-        .markdown-body pre code { padding: 0; background-color: transparent; border: 0; color: #e4e4e7; border-radius: 0; font-size: 0.85rem; margin: 0; }
+        /* Shorthand custom text highlights */
+        .markdown-body code { padding: 0.15rem 0.4rem; background-color: #1c1c1e; border: 1px solid #2c2c2e; color: #5af2ff; border-radius: 0.375rem; font-weight: 500; font-size: 0.85rem; }
+        
+        /* Premium Token Highlighting Engine Class Overrides */
+        .token-keyword { color: #ff3b30; font-weight: 600; }
+        .token-symbol { color: #5af2ff; }
+        .token-string { color: #34c759; }
+        .token-comment { color: #636366; font-style: italic; }
+        .token-macro { color: #ff9500; font-weight: 500; }
     </style>
 </head>
-<body class="min-h-screen bg-[#030303] text-zinc-400 font-sans flex flex-col justify-between relative" style="margin: 0; padding: 0;">
+<body class="min-h-screen bg-[#030303] text-[#8e8e93] antialiased flex flex-col justify-between relative" style="margin: 0; padding: 0;">
 
-    <!-- Background Grid Canvas & Glowing Ambient Orbs -->
-    <div class="absolute inset-0 pointer-events-none z-0 grid-bg"></div>
-    <div class="absolute top-[-10%] left-[25%] w-[600px] h-[400px] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none z-0 animate-glow"></div>
-    <div class="absolute top-[45%] right-[-5%] w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[100px] pointer-events-none z-0"></div>
+    <!-- Background Grid canvas & ambient glows -->
+    <div class="absolute inset-0 pointer-events-none z-0 grid-bg min-h-[1400px]"></div>
+    <div class="absolute top-[-5%] left-[20%] w-[700px] h-[450px] rounded-full bg-gradient-to-r from-cyan-500/5 to-blue-500/5 blur-[120px] pointer-events-none z-0"></div>
 
-    <!-- Navigation Bar -->
-    <header class="border-b border-zinc-900 bg-[#030303] bg-opacity-75 backdrop-filter backdrop-blur-md sticky top-0 z-50 animate-fade-in">
+    <!-- Top Sticky Header Navigation Panel -->
+    <header class="border-b border-[#1c1c1e] bg-[#030303] bg-opacity-70 backdrop-filter backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <span class="text-xl font-extrabold tracking-tight text-white select-none">🌊 vaib</span>
-                <span class="px-2.5 py-0.5 text-[9px] font-bold bg-zinc-900 text-cyan-400 rounded-full border border-zinc-800 tracking-wider uppercase">Vibe Engine</span>
+                <span class="text-lg font-black text-white tracking-tight uppercase select-none">vaib</span>
             </div>
-            <a href="https://github.com" target="_blank" class="text-sm font-semibold text-zinc-400 hover:text-zinc-100 transition-colors flex items-center">
-                <span>View Source GitHub</span>
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://w3.org" style="width: 14px; height: 14px; min-width: 14px; max-width: 14px; margin-left: 6px; display: inline-block; vertical-align: middle; color: #52525b;">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-            </a>
+            
+            <!-- t3.codes Style Right-Aligned Action Badges -->
+            <div class="flex items-center space-x-4">
+                <a href="https://github.com" target="_blank" class="text-xs font-medium text-[#8e8e93] hover:text-white transition-colors">Download</a>
+                <a href="https://github.com" target="_blank" class="px-3 py-1.5 text-xs font-semibold bg-[#1c1c1e] text-white rounded-full border border-[#2c2c2e] hover:bg-[#2c2c2e] transition-all flex items-center space-x-1.5 shadow-sm">
+                    <span class="text-[#ff9500]">★</span>
+                    <span>GitHub stars</span>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Component Tree Target Container -->
+    <!-- Main Content Area -->
     <main class="max-w-5xl mx-auto px-6 py-12 w-full flex-grow relative z-10 animate-slide-up">
         <!-- {{VAIB_DYNAMIC_MARKDOWN_BODY}} -->
     </main>
 
-    <!-- Footer Block -->
-    <footer class="border-t border-zinc-900 py-10 bg-[#030303] relative z-10">
-        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4">
-            <div>&copy; 2026 vaib Architecture framework. Open-source under MIT bounds.</div>
-            <div class="tracking-widest uppercase font-semibold text-zinc-700 font-mono text-[9px]">Pre-Compiled Static Build</div>
+    <!-- Pre-Compiled t3 Style Footer Base -->
+    <footer class="border-t border-[#1c1c1e] py-10 bg-[#030303] relative z-10 text-xs text-[#636366]">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-sans">
+            <div class="flex items-center space-x-2">
+                <span class="font-bold text-white uppercase text-[10px] tracking-wider">vaib</span>
+                <span>&copy; 2026. MIT licensed.</span>
+            </div>
+            <div class="flex items-center space-x-6 text-[#8e8e93]">
+                <a href="https://github.com" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                <a href="#" class="hover:text-white transition-colors">Discord</a>
+                <a href="https://github.com/main/install.sh" class="hover:text-white transition-colors">Download</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+            </div>
         </div>
     </footer>
 
