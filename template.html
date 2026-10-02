@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-zinc-950 text-zinc-50 antialiased selection:bg-cyan-500 selection:text-zinc-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vaib — Vibe-Accelerated Intent Blocks</title>
+    <script src="https://tailwindcss.com"></script>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Premium Server-Side Markdown Layout Classes */
+        .markdown-body h1 { @apply text-4xl font-extrabold tracking-tight text-white mb-6 border-b border-zinc-900 pb-3 mt-12 first:mt-0; }
+        .markdown-body h2 { @apply text-2xl font-bold tracking-tight text-white mb-4 border-b border-zinc-900 pb-2 mt-12; }
+        .markdown-body h3 { @apply text-xl font-bold tracking-tight text-zinc-100 mb-3 mt-8; }
+        .markdown-body p { @apply text-zinc-400 text-base leading-relaxed mb-4; }
+        .markdown-body ul, .markdown-body ol { @apply list-disc list-inside text-zinc-400 pl-4 space-y-2 mb-4; }
+        .markdown-body blockquote { @apply border-l-4 border-cyan-500 bg-zinc-900/40 px-4 py-3 rounded-r-xl italic text-zinc-300 my-6; }
+        
+        /* High-Density Structural Data Tables */
+        .markdown-body table { @apply w-full text-left border-collapse my-6 text-sm bg-zinc-900/20 border border-zinc-900 rounded-xl overflow-hidden; }
+        .markdown-body th { @apply bg-zinc-900/60 px-4 py-3 text-zinc-200 font-bold border-b border-zinc-800 tracking-wider; }
+        .markdown-body td { @apply px-4 py-3 text-zinc-400 border-b border-zinc-900/60 leading-normal; }
+        .markdown-body tr:last-child td { @apply border-b-0; }
+        
+        /* Syntax Blocks formatting */
+        .markdown-body pre { @apply bg-zinc-900/80 p-5 rounded-2xl border border-zinc-900 overflow-x-auto my-6 shadow-xl leading-relaxed text-zinc-300 text-xs sm:text-sm; }
+        .markdown-body code { @apply px-1.5 py-0.5 bg-zinc-900 border border-zinc-900 text-cyan-400 rounded-md font-medium text-xs sm:text-sm mx-0.5; }
+        .markdown-body pre code { @apply p-0 bg-transparent border-0 text-zinc-300 text-xs sm:text-sm m-0; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Sticky Navigation Top Bar -->
+    <header class="border-b border-zinc-900 bg-zinc-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 select-none">🌊 vaib</span>
+                <span class="px-2 py-0.5 text-xs font-semibold bg-zinc-900 text-zinc-400 rounded-full border border-zinc-800">Static Docs</span>
+            </div>
+            <a href="https://github.com" target="_blank" class="text-sm font-semibold text-zinc-400 hover:text-zinc-100 transition-colors flex items-center space-x-1">
+                <span>View Source GitHub</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Pre-Render Injection Target -->
+    <main class="max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
+        <article class="markdown-body">
+            <!-- {{VAIB_MARKDOWN_CONTENT}} -->
+        </article>
+    </main>
+
+    <!-- Minimalistic Developer Footer -->
+    <footer class="border-t border-zinc-900 py-8 bg-zinc-950">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4">
+            <div>&copy; 2026 vaib Architecture framework. Distribute under MIT License guidelines.</div>
+            <div>Pre-compiled on push. 🌊</div>
+        </div>
+    </footer>
+
+</body>
+</html>

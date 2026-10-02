@@ -1,0 +1,77 @@
+name: Deploy vaib Marketing Page
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'template.html'
+      - 'README.md'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python Engine
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Markdown Compilers
+        run: pip install markdown
+
+      - name: Pre-compile README into Template Shell
+        run: |
+          python3 -c "
+          import markdown
+          
+          # Read raw files
+          with open('README.md', 'r') as r:
+              md_text = r.read()
+          with open('template.html', 'r') as t:
+              template = t.read()
+              
+          # Strip out header configurations if they exist
+          if md_text.startswith('---'):
+              parts = md_text.split('---', 2)
+              if len(parts) >= 3:
+                  md_text = parts[2]
+                  
+          # Compile to ultra-clean HTML tables and paragraphs
+          html_content = markdown.markdown(md_text, extensions=['tables', 'fenced_code'])
+          
+          # Inject and write static asset output
+          output = template.replace('<!-- {{VAIB_MARKDOWN_CONTENT}} -->', html_content)
+          with open('index.html', 'w') as out:
+              out.write(output)
+          "
+
+      - name: Setup Pages Infrastructure
+        uses: actions/configure-pages@v5
+
+      - name: Package Static Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
