@@ -1,18 +1,16 @@
 # 🌊 vaib
 
-**Semantic constraints for agentic engineering.**
-
-*High-density architectural primitives that convert loose intents into verified code structures.*
+**Assembly for LLM Agents.** High-density notation for flow-state vibe coding.
 
 ---
 
 ## ⚡ Why vaib?
 Traditional LLM prompts waste tokens on conversational filler, imprecise descriptions, and redundant file rewrites. **vaib** is an open-source, zero-compilation linguistic wrapper and cognitive-steering protocol built for agentic terminals (`claude-code`, Cursor, VS Code Agents).
 
-* **Prefix-Cache Optimized**: Declarative YAML-like frontmatter triggers 100% LLM cache hits.
-* **Diff-Only Output**: `terse_diff` forces 65%–75% token savings by emitting line mutations instead of full-file rewrites.
-* **Zero Halting Fluff**: `caveman` mode compresses output streams by up to 85% for lightning-fast execution.
-* **Deterministic Steering**: Suffixes like `!` and `?` enforce strict side-effect isolation and runtime exception paths.
+* **The 3 Zeroes**: **Zero Fluff** (up to 85% token reduction via `caveman` mode), **Zero Redo Tax** (guard clauses eliminate hallucinated logic bugs), **Zero Setup** (runs natively in your agent context).
+* **Prefix-Cache Optimized**: Declarative frontmatter triggers 100% LLM cache hits.
+* **Single-Line Friendly**: Type rapid multi-step logic on a single line using inline `;` chaining without messy multiline chat boxes.
+* **Diff-Only Output**: `terse_diff` saves 65%–75% output costs by emitting raw line mutations instead of full-file rewrites.
 
 ---
 
@@ -40,12 +38,18 @@ Because `vaib` structures your inputs into high-density declarative data maps an
 Stop writing paragraphs. Steer your agent with precise structural operators:
 
 ### 🚦 Flow & Logic Control
-* `method?` — **Inspection Suffix.** Enforces side-effect-free boolean checks.
-* `action!` — **Enforcement Suffix.** Triggers hard database commits or runtime exception throws.
-* `{{ loose thoughts }}` — **Natural Escape.** Drop raw, unstructured thoughts mid-syntax; the engine translates them contextually.
+* `;` — **Inline Chain.** Express multi-statement workflows on a single line.
+* `unless cond` — **Postfix Guard.** Early-exit guard clause (`throw: Err unless user.active?`).
+* `given: [a, b]` — **Preconditions.** Logical assertion array before execution.
+* `:symbol` — **Enum Keys.** Concise status mapping (`:pending`, `:approved`).
+* `method?` — **Inspection Suffix.** Side-effect-free boolean checks.
+* `action!` — **Enforcement Suffix.** Hard database commits or runtime exception throws.
+* `{{ loose thoughts }}` — **Natural Escape.** Drop raw, unstructured thoughts mid-syntax.
 * `"literal"` / `'char'` — **Text Lock.** Guarantees exact UI string or character preservation.
 
-### 🎭 Cognitive Identity Overrides
+### 🎭 Cognitive Identity & Context Controls
+* `&scope("path")` — **Context Guard.** Restricts agent focus strictly to specified path(s).
+* `&dry` — **Plan Lockdown.** Forces a 3-line structural dry run before touching files.
 * `&grill` — Shifts agent into a hostile Principal Engineer hunting defects and security leaks.
 * `&architect` — Systems optimization mode. Forces schema trees and service boundaries first.
 * `&mentor` — Deep educational mode with pattern breakdowns and metaphors.
@@ -68,22 +72,21 @@ output_format: terse_diff
 
 # State: Wallet
 - balance: decimal! [invariant: >= 0]
+- status: enum(:active, :frozen, :flagged)
 
 # Logic
 - fn ProcessTransfer(from_id, to_id, amount) {
-    from = Wallet.find(from_id)
-    to = Wallet.find(to_id)
+    from = Wallet.find(from_id) ; to = Wallet.find(to_id)
     
-    throw: InsufficientFunds if amount > from.balance
-    throw: FrozenAccount if from.frozen? || to.frozen?
+    # Postfix guards & enum symbols eliminate multi-line nested IFs
+    throw: InsufficientFunds unless from.balance >= amount
+    throw: FrozenAccount if from.status == :frozen || to.status == :frozen
     
-    # Destructive network action with built-in retry logic and robust fallback
+    # Destructive action with backoff retry and fallback
     Stripe.charge!(from.customer_id, amount) [retry: 3]
-    rescue: -> &ask("Stripe gateway timed out. Attempt local ledger fallback?")
+    rescue: -> &ask("Gateway timed out. Fallback to local ledger?")
     
-    from.balance -= amount
-    to.balance += amount
-    
+    from.balance -= amount ; to.balance += amount
     -> mutate: Wallet.save_all!([from, to])
 }
 ```

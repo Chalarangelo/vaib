@@ -6,24 +6,49 @@ import markdown
 
 def syntax_highlight_vaib(raw_code):
     """Vibrant, multi-token syntax grammar for the vaib code editor component."""
+    # Protect quote literals from HTML attribute collisions during regex replacement
+    strings = []
+    def save_string(match):
+        strings.append(match.group(0))
+        return f"__STR_{len(strings)-1}__"
+
+    raw_code = re.sub(r'("[^"]*"|\'[^\']*\')', save_string, raw_code)
+
+    # Key-value frontmatter headers
     raw_code = re.sub(r'\b(vaib|stack|output_format):', r"<span class='token-key'>\1:</span>", raw_code)
-    raw_code = re.sub(r'("[^"]*"|\'[^\']*\')', r"<span class='token-string'>\1</span>", raw_code)
+    
+    # Function declarations
     raw_code = re.sub(r'(- fn\s+)([A-Za-z0-9_]+)', r"<span class='token-fn-prefix'>\1</span><span class='token-fn-name'>\2</span>", raw_code)
+    
+    # State & Logic structural markers
     raw_code = raw_code.replace("# State:", "<span class='token-section'># State:</span>")
     raw_code = raw_code.replace("# Logic", "<span class='token-section'># Logic</span>")
     
-    raw_code = re.sub(r'\b(enum|decimal!|char|string|boolean|int)\b', r"<span class='token-type'>\1</span>", raw_code)
-    raw_code = re.sub(r'\b(match|throw|rescue|mutate)\b', r"<span class='token-keyword'>\1</span>", raw_code)
+    # Comments
+    raw_code = re.sub(r'(?m)^#\s*(.*)$', r"<span class='token-comment'># \1</span>", raw_code)
 
+    # Data types & Flow Control Keywords
+    raw_code = re.sub(r'\b(enum|decimal!|char|string|boolean|int)\b', r"<span class='token-type'>\1</span>", raw_code)
+    raw_code = re.sub(r'\b(match|throw|rescue|mutate|if|unless)\b', r"<span class='token-keyword'>\1</span>", raw_code)
+
+    # Flow Operators
     operators = ["->", "=>", "|>", "==", "!=", ">=", "<="]
     for op in operators:
         raw_code = raw_code.replace(op, f"<span class='token-operator'>{op}</span>")
         
-    commands = ["&grill", "&architect", "&mentor", "&canary", "&run", "&call", "&investigate", "&memorize", "&review", "&wait", "&ask", "&pr", "&trace"]
+    # Command Directives
+    commands = [
+        "&grill", "&architect", "&mentor", "&canary", "&run", "&call", 
+        "&investigate", "&memorize", "&review", "&wait", "&ask", "&pr", 
+        "&trace", "&scope", "&dry", "&submit", "&explain"
+    ]
     for cmd in commands:
         raw_code = raw_code.replace(cmd, f"<span class='token-command'>{cmd}</span>")
-        
-    raw_code = re.sub(r'(?m)^#\s*(.*)$', r"<span class='token-comment'># \1</span>", raw_code)
+
+    # Restore string literals with highlighting tag
+    for i, s in enumerate(strings):
+        raw_code = raw_code.replace(f"__STR_{i}__", f"<span class='token-string'>{s}</span>")
+
     return raw_code
 
 def compile_premium_site():
@@ -56,7 +81,9 @@ def compile_premium_site():
     # Remove duplicated tagline paragraphs parsed from top of README
     for p in list(soup.find_all('p')):
         p_text = p.get_text().strip()
-        if "Semantic constraints for agentic engineering" in p_text or \
+        if "Assembly for LLM Agents" in p_text or \
+           "Semantic constraints for agentic engineering" in p_text or \
+           "High-density notation for flow-state vibe coding" in p_text or \
            "High-density architectural primitives that convert loose intents" in p_text:
             p.decompose()
 
@@ -128,7 +155,7 @@ def compile_premium_site():
                     Stop coding. <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Start vibing.</span> 🌊
                 </h3>
                 <p class="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto mb-6">
-                    Elevate your AI agent workflows with zero-compilation semantic constraints today.
+                    Elevate your AI agent workflows with zero-compilation high-density notation today.
                 </p>
                 <a href="https://github.com/Chalarangelo/vaib" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold text-xs px-6 py-3 rounded-lg hover:opacity-90 transition-all shadow-lg hover:shadow-purple-500/25">
                     <span>Get Started on GitHub</span>
@@ -138,15 +165,15 @@ def compile_premium_site():
             '''
             p.replace_with(BeautifulSoup(banner_html, 'html.parser'))
 
-    # Hero section with copy button
+    # Hero section with updated tagline & installer command
     hero_html = '''
     <section class="text-center pt-12 pb-10 space-y-6 max-w-2xl mx-auto font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Semantic constraints <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">for agentic engineering.</span>
+            Assembly for LLM Agents. <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">High-density notation for flow-state vibe coding.</span>
         </h1>
         <p class="text-zinc-400 text-sm sm:text-base font-normal leading-relaxed">
-            High-density architectural primitives that convert loose intents into verified code structures.
+            An open-source, zero-compilation linguistic wrapper and cognitive-steering protocol built for agentic terminals.
         </p>
         
         <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
@@ -162,9 +189,9 @@ def compile_premium_site():
         <div class="pt-2 max-w-lg mx-auto">
             <div class="bg-[#070b14] border border-zinc-800/80 px-4 py-3 rounded-lg flex items-center space-x-3 text-zinc-300 shadow-md">
                 <span class="text-purple-400 font-bold select-none text-xs font-mono">$</span>
-                <input id="hero-cmd" type="text" readonly value="git clone https://github.com/Chalarangelo/vaib.git" 
+                <input id="hero-cmd" type="text" readonly value="curl -sSL https://raw.githubusercontent.com/Chalarangelo/vaib/main/install.sh | bash" 
                        class="bg-transparent border-none focus:outline-none font-mono text-xs w-full select-all text-zinc-300 text-left">
-                <button onclick="copyHeroCmd(this)" class="text-xs text-zinc-400 hover:text-white font-mono bg-zinc-800/80 hover:bg-zinc-700 px-2 py-1 rounded transition-colors flex-shrink-0 border border-zinc-700/50">
+                <button onclick="copyHeroCmd(this)" class="text-xs text-zinc-400 hover:text-white font-mono bg-zinc-800/80 hover:bg-zinc-700 px-2 py-1 rounded transition-colors flex-shrink-0 border border-zinc-700/50 cursor-pointer">
                     Copy
                 </button>
             </div>
