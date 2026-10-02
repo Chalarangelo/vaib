@@ -8,6 +8,7 @@ on:
     paths:
       - 'template.html'
       - 'README.md'
+      - 'build_page.py'
       - '.github/workflows/deploy-site.yml'
   workflow_dispatch:
 
@@ -38,34 +39,13 @@ jobs:
       - name: Install Markdown Compilers
         run: pip install markdown
 
-      - name: Pre-compile README into Template Shell
-        run: |
-          python3 -c "
-          import markdown
-          
-          # Read raw files
-          with open('README.md', 'r') as r:
-              md_text = r.read()
-          with open('template.html', 'r') as t:
-              template = t.read()
-              
-          # Strip out frontmatter configurations if they exist
-          if md_text.startswith('---'):
-              parts = md_text.split('---', 2)
-              if len(parts) >= 3:
-                  md_text = parts[2]
-                  
-          # Compile to clean HTML structural definitions
-          html_content = markdown.markdown(md_text, extensions=['tables', 'fenced_code'])
-          
-          # Inject and write static asset output
-          output = template.replace('<!-- {{VAIB_MARKDOWN_CONTENT}} -->', html_content)
-          with open('index.html', 'w') as out:
-              out.write(output)
-          "
+      - name: Pre-compile README into Premium Theme Shell
+        run: python3 build_page.py
 
       - name: Inject Jekyll Bypass Flag
-        run: touch .nojekyll # 👈 Stops GitHub from stripping custom Tailwind attributes
+        run: |
+          touch .nojekyll
+          echo "Cache Seed: $(date +%s)" > cache_bust.txt
 
       - name: Setup Pages Infrastructure
         uses: actions/configure-pages@v5

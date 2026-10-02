@@ -1,71 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-zinc-950 text-zinc-50 antialiased selection:bg-cyan-500 selection:text-zinc-950">
+<html lang="en" class="bg-[#09090b] text-zinc-50 antialiased selection:bg-cyan-500 selection:text-zinc-950">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vaib — Vibe-Accelerated Intent Blocks</title>
-    
-    <!-- Core Styling Layer Injection -->
+    <title>vaib — The Linguistic Wrapper for Coding Agents</title>
     <script src="https://tailwindcss.com"></script>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    
+    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030303; }
         code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Safe native CSS styling blocks for pre-rendered markdown tags */
-        .markdown-body h1 { font-size: 2.25rem; font-weight: 800; color: #ffffff; margin-bottom: 1.5rem; border-bottom: 1px solid #27272a; padding-bottom: 0.75rem; margin-top: 3rem; letter-spacing: -0.025em; }
-        .markdown-body h2 { font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-bottom: 1rem; border-bottom: 1px solid #27272a; padding-bottom: 0.5rem; margin-top: 3rem; letter-spacing: -0.025em; }
-        .markdown-body h3 { font-size: 1.25rem; font-weight: 700; color: #f4f4f5; margin-bottom: 0.75rem; margin-top: 2rem; letter-spacing: -0.025em; }
-        .markdown-body p { color: #a1a1aa; font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
-        .markdown-body ul { list-style-type: disc; list-style-position: inside; color: #a1a1aa; padding-left: 1rem; margin-bottom: 1rem; }
-        .markdown-body li { margin-bottom: 0.5rem; }
-        .markdown-body blockquote { border-left: 4px solid #06b6d4; background-color: rgba(24, 24, 27, 0.4); padding: 0.75rem 1rem; border-top-right-radius: 0.75rem; border-bottom-right-radius: 0.75rem; font-style: italic; color: #d4d4d8; margin: 1.5rem 0; }
-        
-        /* High-density grid data tables formatting mapping your rules tools */
-        .markdown-body table { width: 100%; text-align: left; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; background-color: rgba(24, 24, 27, 0.2); border: 1px solid #27272a; border-radius: 0.75rem; overflow: hidden; }
-        .markdown-body th { background-color: rgba(39, 39, 42, 0.6); padding: 0.75rem 1rem; color: #e4e4e7; font-weight: 700; border-bottom: 1px solid #27272a; }
-        .markdown-body td { padding: 0.75rem 1rem; color: #a1a1aa; border-bottom: 1px solid rgba(39, 39, 42, 0.6); }
-        .markdown-body tr:last-child td { border-bottom: 0; }
-        
-        /* Code snippet block aesthetics */
-        .markdown-body pre { background-color: rgba(24, 24, 27, 0.8); padding: 1.25rem; border-radius: 1rem; border: 1px solid #27272a; overflow-x: auto; margin: 1.5rem 0; color: #e4e4e7; font-size: 0.875rem; line-height: 1.625; }
-        .markdown-body code { padding: 0.125rem 0.375rem; background-color: #18181b; border: 1px solid #27272a; color: #22d3ee; border-radius: 0.375rem; font-weight: 500; font-size: 0.875rem; }
-        .markdown-body pre code { padding: 0; background-color: transparent; border: 0; color: #e4e4e7; border-radius: 0; font-size: 0.875rem; margin: 0; }
+        /* t3.codes Style Grid Overlay Backdrop Pattern */
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(39, 39, 42, 0.2) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(39, 39, 42, 0.2) 1px, transparent 1px);
+        }
+        .grid-fade {
+            mask-image: radial-gradient(ellipse at top, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at top, black 40%, transparent 80%);
+        }
+
+        /* Fluid Entry Animations */
+        @keyframes subtleGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+        .glow-pulse { animation: subtleGlow 8s infinite ease-in-out; }
     </style>
 </head>
-<body class="bg-zinc-950 text-zinc-50 min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden relative">
 
-    <!-- Top Glowing Header Navigation -->
-    <header class="border-b border-zinc-900 bg-zinc-950/80 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Ambient Grid & Glow Backdrop -->
+    <div class="absolute inset-0 grid-bg grid-fade pointer-events-none z-0 min-h-[900px]"></div>
+    <div class="absolute top-[-10%] left-[20%] w-[600px] h-[400px] rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 blur-[120px] glow-pulse pointer-events-none z-0"></div>
+
+    <!-- Sticky Navigation Top Bar -->
+    <header class="border-b border-zinc-900 bg-[#030303]/60 backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <span class="text-xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 select-none">🌊 vaib</span>
-                <span class="px-2 py-0.5 text-xs font-semibold bg-zinc-900 text-zinc-400 rounded-full border border-zinc-800">Static Docs</span>
+                <span class="text-xl font-extrabold tracking-tight text-white select-none">🌊 vaib</span>
+                <span class="px-2 py-0.5 text-[10px] font-bold bg-zinc-900 text-zinc-400 rounded-full border border-zinc-800 tracking-wider uppercase">Open Source</span>
             </div>
-            <a href="https://github.com" target="_blank" class="text-sm font-semibold text-zinc-400 hover:text-zinc-100 transition-colors flex items-center space-x-1">
-                <span>View Source GitHub</span>
-                <svg class="w-4 h-4 ml-1 inline-block align-middle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://w3.org" style="width: 1rem; height: 1rem;">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-            </a>
+            <div class="flex items-center space-x-6">
+                <a href="https://github.com" target="_blank" class="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors flex items-center space-x-1.5">
+                    <span>GitHub Repo</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Content Target Box -->
-    <main class="max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
-        <article class="markdown-body">
-            <!-- {{VAIB_MARKDOWN_CONTENT}} -->
-        </article>
+    <!-- Main Component Tree Wrapper -->
+    <main class="max-w-4xl mx-auto px-6 py-20 w-full flex-grow relative z-10 space-y-24">
+        
+        <!-- Target for Programmatic Content Injection -->
+        <div id="vaib-compiled-root">
+            <!-- {{VAIB_DYNAMIC_MARKDOWN_BODY}} -->
+        </div>
+
     </main>
 
-    <!-- Minimalistic Developer Footer -->
-    <footer class="border-t border-zinc-900 py-8 bg-zinc-950">
-        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-4">
-            <div>&copy; 2026 vaib Architecture framework. Distribute under MIT License guidelines.</div>
-            <div>Pre-compiled on push. 🌊</div>
+    <!-- Minimalistic Developer Footer [t3.codes inspired] -->
+    <footer class="border-t border-zinc-900 py-10 bg-[#030303] relative z-10">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+            <div class="flex items-center space-x-2">
+                <span>&copy; 2026 vaib Architecture. MIT Licensed.</span>
+            </div>
+            <div class="tracking-wide uppercase font-semibold text-zinc-600 font-mono">Stop writing boilerplate. Start Vibing.</div>
         </div>
     </footer>
 
