@@ -1,6 +1,6 @@
 # 🌊 vaib
 
-**Assembly for LLM Agents.** High-density notation for flow-state vibe coding.
+**Assembly for LLM Agents.** High-density DSL to save tokens and flow.
 
 ---
 

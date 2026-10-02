@@ -84,6 +84,8 @@ def compile_premium_site():
         if "Assembly for LLM Agents" in p_text or \
            "Semantic constraints for agentic engineering" in p_text or \
            "High-density notation for flow-state vibe coding" in p_text or \
+           "High-density DSL for AI agents" in p_text or \
+           "Save tokens and flow" in p_text or \
            "High-density architectural primitives that convert loose intents" in p_text:
             p.decompose()
 
@@ -170,7 +172,7 @@ def compile_premium_site():
     <section class="text-center pt-12 pb-10 space-y-6 max-w-2xl mx-auto font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
             Assembly for LLM Agents. <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">High-density notation for flow-state vibe coding.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">High-density DSL to save tokens and flow.</span>
         </h1>
         <p class="text-zinc-400 text-sm sm:text-base font-normal leading-relaxed">
             An open-source, zero-compilation linguistic wrapper and cognitive-steering protocol built for agentic terminals.
