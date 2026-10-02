@@ -1,0 +1,43 @@
+name: Compile vaib Installer
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'SKILL.md'
+      - 'build_installer.py'
+      - '.github/workflows/compile-installer.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate install.sh from SKILL.md
+        run: python build_installer.py
+
+      - name: Hardened Loop-Safe Commit and Push
+        run: |
+          git config --local user.email "github-actions[bot]@://github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Check if install.sh has actual differences
+          if ! git diff --quiet install.sh; then
+            echo "📈 Changes detected in compiled output. Committing changes securely..."
+            git add install.sh
+            
+            # The [skip ci] string prevents GitHub from creating a recursive action run
+            git commit -m "chore: dynamically re-compile install.sh from SKILL.md [skip ci]"
+            git push
+          else
+            echo "✅ install.sh is already fully synchronized with SKILL.md. No push required."
+          fi
