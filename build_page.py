@@ -49,9 +49,21 @@ def compile_premium_site():
     html_raw = markdown.markdown(md_text, extensions=['tables', 'fenced_code'])
     soup = BeautifulSoup(html_raw, 'html.parser')
 
-    # Remove duplicated h1/title/subtitle lines rendered from README top
+    # Remove top-level h1 headers from README parser output
     for h1 in soup.find_all('h1'):
         h1.decompose()
+
+    # Remove duplicated tagline paragraphs parsed from top of README
+    for p in list(soup.find_all('p')):
+        p_text = p.get_text().strip()
+        if "Semantic constraints for agentic engineering" in p_text or \
+           "High-density architectural primitives that convert loose intents" in p_text:
+            p.decompose()
+
+    # Remove leading horizontal rules before the first content section
+    for hr in list(soup.find_all('hr')):
+        if hr.find_previous_sibling() is None or not any(hr.previous_siblings):
+            hr.decompose()
 
     # Uniform dark subtle borders for h2
     for h2 in soup.find_all('h2'):
@@ -119,7 +131,7 @@ def compile_premium_site():
             '''
             p.replace_with(BeautifulSoup(banner_html, 'html.parser'))
 
-    # Hero section definition
+    # Single-source Hero section
     hero_html = '''
     <section class="text-left pt-10 pb-8 space-y-5 max-w-3xl font-sans">
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
