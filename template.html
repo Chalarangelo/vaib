@@ -4,37 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vaib — Vibe-Accelerated Intent Blocks</title>
+    
+    <!-- Core Styling Layer Injection -->
     <script src="https://tailwindcss.com"></script>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #09090b; }
         code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Premium Server-Side Markdown Layout Classes */
-        .markdown-body h1 { @apply text-4xl font-extrabold tracking-tight text-white mb-6 border-b border-zinc-900 pb-3 mt-12 first:mt-0; }
-        .markdown-body h2 { @apply text-2xl font-bold tracking-tight text-white mb-4 border-b border-zinc-900 pb-2 mt-12; }
-        .markdown-body h3 { @apply text-xl font-bold tracking-tight text-zinc-100 mb-3 mt-8; }
-        .markdown-body p { @apply text-zinc-400 text-base leading-relaxed mb-4; }
-        .markdown-body ul, .markdown-body ol { @apply list-disc list-inside text-zinc-400 pl-4 space-y-2 mb-4; }
-        .markdown-body blockquote { @apply border-l-4 border-cyan-500 bg-zinc-900/40 px-4 py-3 rounded-r-xl italic text-zinc-300 my-6; }
+        /* Pre-baked typography selectors targeting raw markdown text output */
+        .markdown-body h1 { font-size: 2.25rem; font-weight: 800; tracking-tight: -0.025em; color: #ffffff; margin-bottom: 1.5rem; border-bottom: 1px solid #27272a; padding-bottom: 0.75rem; margin-top: 3rem; }
+        .markdown-body h2 { font-size: 1.5rem; font-weight: 700; tracking-tight: -0.025em; color: #ffffff; margin-bottom: 1rem; border-bottom: 1px solid #27272a; padding-bottom: 0.5rem; margin-top: 3rem; }
+        .markdown-body h3 { font-size: 1.25rem; font-weight: 700; tracking-tight: -0.025em; color: #f4f4f5; margin-bottom: 0.75rem; margin-top: 2rem; }
+        .markdown-body p { color: #a1a1aa; font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+        .markdown-body ul { list-style-type: disc; list-style-position: inside; color: #a1a1aa; padding-left: 1rem; margin-bottom: 1rem; }
+        .markdown-body li { margin-bottom: 0.5rem; }
+        .markdown-body blockquote { border-left: 4px solid #06b6d4; background-color: rgba(24, 24, 27, 0.4); padding: 0.75rem 1rem; border-top-right-radius: 0.75rem; border-bottom-right-radius: 0.75rem; font-style: italic; color: #d4d4d8; margin: 1.5rem 0; }
         
-        /* High-Density Structural Data Tables */
-        .markdown-body table { @apply w-full text-left border-collapse my-6 text-sm bg-zinc-900/20 border border-zinc-900 rounded-xl overflow-hidden; }
-        .markdown-body th { @apply bg-zinc-900/60 px-4 py-3 text-zinc-200 font-bold border-b border-zinc-800 tracking-wider; }
-        .markdown-body td { @apply px-4 py-3 text-zinc-400 border-b border-zinc-900/60 leading-normal; }
-        .markdown-body tr:last-child td { @apply border-b-0; }
+        /* High-density grid data tables mapping your tools dictionary */
+        .markdown-body table { w-full: 100%; text-align: left; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.875rem; background-color: rgba(24, 24, 27, 0.2); border: 1px solid #27272a; border-radius: 0.75rem; overflow: hidden; width: 100%; }
+        .markdown-body th { background-color: rgba(39, 39, 42, 0.6); padding: 0.75rem 1rem; color: #e4e4e7; font-weight: 700; border-bottom: 1px solid #27272a; }
+        .markdown-body td { padding: 0.75rem 1rem; color: #a1a1aa; border-bottom: 1px solid rgba(39, 39, 42, 0.6); }
+        .markdown-body tr:last-child td { border-bottom: 0; }
         
-        /* Syntax Blocks formatting */
-        .markdown-body pre { @apply bg-zinc-900/80 p-5 rounded-2xl border border-zinc-900 overflow-x-auto my-6 shadow-xl leading-relaxed text-zinc-300 text-xs sm:text-sm; }
-        .markdown-body code { @apply px-1.5 py-0.5 bg-zinc-900 border border-zinc-900 text-cyan-400 rounded-md font-medium text-xs sm:text-sm mx-0.5; }
-        .markdown-body pre code { @apply p-0 bg-transparent border-0 text-zinc-300 text-xs sm:text-sm m-0; }
+        /* Shorthand codeblocks styling */
+        .markdown-body pre { background-color: rgba(24, 24, 27, 0.8); padding: 1.25rem; border-radius: 1rem; border: 1px solid #27272a; overflow-x: auto; margin: 1.5rem 0; color: #e4e4e7; font-size: 0.875rem; line-height: 1.625; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5); }
+        .markdown-body code { padding: 0.125rem 0.375rem; background-color: #18181b; border: 1px solid #27272a; color: #22d3ee; border-radius: 0.375rem; font-weight: 500; font-size: 0.875rem; }
+        .markdown-body pre code { padding: 0; background-color: transparent; border: 0; color: #e4e4e7; border-radius: 0; font-size: 0.875rem; margin: 0; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-    <!-- Sticky Navigation Top Bar -->
+    <!-- Top Glowing Header Navigation -->
     <header class="border-b border-zinc-900 bg-zinc-950/80 backdrop-blur sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -48,7 +52,7 @@
         </div>
     </header>
 
-    <!-- Pre-Render Injection Target -->
+    <!-- Content Target Box -->
     <main class="max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
         <article class="markdown-body">
             <!-- {{VAIB_MARKDOWN_CONTENT}} -->

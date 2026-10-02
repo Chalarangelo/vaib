@@ -49,13 +49,13 @@ jobs:
           with open('template.html', 'r') as t:
               template = t.read()
               
-          # Strip out header configurations if they exist
+          # Strip out frontmatter configurations if they exist
           if md_text.startswith('---'):
               parts = md_text.split('---', 2)
               if len(parts) >= 3:
                   md_text = parts[2]
                   
-          # Compile to ultra-clean HTML tables and paragraphs
+          # Compile to clean HTML structural definitions
           html_content = markdown.markdown(md_text, extensions=['tables', 'fenced_code'])
           
           # Inject and write static asset output
@@ -63,6 +63,9 @@ jobs:
           with open('index.html', 'w') as out:
               out.write(output)
           "
+
+      - name: Inject Jekyll Bypass Flag
+        run: touch .nojekyll # 👈 Stops GitHub from stripping custom Tailwind attributes
 
       - name: Setup Pages Infrastructure
         uses: actions/configure-pages@v5
