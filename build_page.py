@@ -17,7 +17,7 @@ def syntax_highlight_vaib(raw_code):
 
     operators = ["->", "=>", "|>", "==", "!=", ">=", "<="]
     for op in operators:
-        raw_code = raw_code.replace(op, f"<span class='token-operator'>{op}</span>", raw_code)
+        raw_code = raw_code.replace(op, f"<span class='token-operator'>{op}</span>")
         
     commands = ["&grill", "&architect", "&mentor", "&canary", "&run", "&call", "&investigate", "&memorize", "&review", "&wait", "&ask", "&pr", "&trace"]
     for cmd in commands:
